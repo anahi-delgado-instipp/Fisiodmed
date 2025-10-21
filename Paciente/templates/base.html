@@ -1,0 +1,191 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Fisiodmed</title>
+    <link href="{% static 'tasks/css/style.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'tasks/css/styles.css' %}" rel="stylesheet" />
+    <script src="{% static 'tasks/js/all.js' %}" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+
+    <nav class="sb-topnav navbar navbar-expand navbar-dark"
+        style="background-color: #084c68; height: 110px; width: auto;  position: relative;">
+
+
+        <a class="navbar-brand ps-3">Menu de Opciones
+
+
+
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                    class="fas fa-bars"></i></button>
+            <img src="{% static 'tasks/img/logo.png' %}" alt="Logo"
+                style=" padding: 10px; height: 110px; width: auto;"></a>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Configuracion</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Cerar Sesion</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #084c68;">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading"></div>
+
+                        <a class="nav-link" href="{% url 'inicio' %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Inicio
+                        </a>
+
+                        <!--GESTION CITA-->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCitas"
+                            aria-expanded="false" aria-controls="collapseCitas">
+                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                            Gestion Citas
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseCitas" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'agendarcita' %}"> Listar Citas</a>
+                                <a class="nav-link" href="{% url 'registrarcita' %}">Agregar Cita</a>
+                            </nav>
+                        </div>
+
+                        <!-- GESTIÓN MÉDICOS -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseMedicos" aria-expanded="false" aria-controls="collapseMedicos">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-md"></i></div>
+                            Gestión Médicos
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseMedicos" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'ListadoMedico' %}">Listado Médicos</a>
+                                <a class="nav-link" href="{% url 'registrarmedico' %}">Agregar Médico</a>
+                            </nav>
+                        </div>
+
+
+                        <!--Gestion Pacientes-->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapsePaciente" aria-expanded="false" aria-controls="collapsePaciente">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            Gestion Pacientes
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePaciente" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'ListadoPaciente' %}"> Listado Paciente</a>
+                                <a class="nav-link" href="{% url 'registropaciente' %}">Agregar Paciente</a>
+                            </nav>
+                        </div>
+
+                        <!--ESPECIALIDADES-->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseEspecialidades" aria-expanded="false"
+                            aria-controls="collapseEspecialidades">
+                            <div class="sb-nav-link-icon"><i class="fas fa-stethoscope"></i></div>
+                            Gestion Especialidades
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseEspecialidades" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'listarespecialidad' %}">Listado Especialidades</a>
+                                <a class="nav-link" href="{% url 'registroespecialidad' %}">Agregar Especialidad</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link" href="{% url 'contactos' %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                            Contactos
+                        </a>
+
+                        <a class="nav-link" href="{% url 'especialidades' %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-stethoscope"></i></div>
+                            Especialidad
+                        </a>
+                        <a class="nav-link" href="{% url 'inicio' %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-arrow-left"></i></div>
+                            Regresar
+                        </a>
+
+                    </div>
+                </div>
+
+            </nav>
+
+        </div>
+
+        <div id="layoutSidenav_content">
+            <!--<p>
+            <p>Hola {{ user.first_name }} {{ user.last_name }}</p>
+            </p> -->
+
+
+            <!-- CONTENIDO PRINCIPAL -->
+            <main class="container-fluid px-4">
+                {% block content %}
+                <!-- Aquí va el contenido de cada página hija -->
+                {% endblock %}
+            </main>
+
+            <!-- FOOTER -->
+            <div id="layoutAuthentication_footer">
+                <footer class="py-2 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">&copy; Your Website 2023</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'tasks/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'tasks/js/scripts.js' %}"></script>
+    <script src="{% static 'tasks/js/Chart.min.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'tasks/assets/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'assets/demo/chart-bar-demo.js' %}"></script>
+    <script src="{% static 'tasks/js/simple-datatables.min.js '%}" crossorigin="anonymous"></script>
+    <script src="{% static 'tasks/js/formulariovalidacion.js '%}" crossorigin="anonymous"></script>
+</body>
+
+</html>

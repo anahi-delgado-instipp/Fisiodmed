@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Lista Pacientes</h1>
+    <!--<a href="{% url 'registropaciente' %}" class="btn btn-primary mb-3">Registrar Paciente</a>-->
+
+    <div class="row justify-content-center">
+      <div class="col-12">
+
+      
+        <div class="card shadow w-100 mb-4">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered text-center align-middle table-hover" style="min-width: 800px;">
+                <thead style="background-color: #ced4da; color: black;">
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Edad</th>
+                    <th>Dirección</th>
+                    <th>Cantón</th>
+                    <th>Estado Civil</th>
+                    <th>Apellido de Esposo/a</th>
+                    <th>Correo Electrónico</th>
+                    <th>Tipo de Sangre</th>
+                    <th>Celular</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for paciente in pacientes %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ paciente.nombres }}</td>
+                    <td>{{ paciente.apellidos }}</td>
+                    <td>{{ paciente.fecha_nacimiento }}</td>
+                    <td>{{ paciente.edad }} Años</td>
+                    <td>{{ paciente.direccion }}</td>
+                    <td>{{ paciente.canton }}</td>
+                    <td>{{ paciente.estado_civil }}</td>
+                    <td>{{ paciente.apellido_espos }}</td>
+                    <td>{{ paciente.correo }}</td>
+                    <td>{{ paciente.tipo_sangre }}</td>
+                    <td>{{ paciente.celular }}</td>
+                    <td>
+
+                      <a href="{% url 'editarpaciente' paciente.id %}" class="btn btn-secondary btn-sm mb-1">Editar</a>
+                      <a href="{% url 'eliminarpaciente' paciente.id %}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar al paciente {{ paciente.nombres }} {{ paciente.apellidos }}?');">
+                        Eliminar
+                      </a>
+
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

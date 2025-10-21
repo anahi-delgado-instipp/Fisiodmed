@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container ">
+    <h2 class="mt-4 text-center"> Listado Citas</h2>
+    <!-- <a href="{% url 'registrarcita' %}" class="btn btn-primary">Nueva Cita</a> -->
+</div>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="row my-4">
+                <div class="col-md-12">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <br>
+                            <table class="table datatables" id="dataTable-1">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Paciente</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Medico</th>
+                                        <th>Especialidades</th>
+                                        <th>Acciones</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cita in citas %}
+                                    <tr>
+                                        <td>{{ cita.id }}</td>
+                                        <td>{{ cita.paciente }}</td>
+                                        <td>{{ cita.fecha_cita|date:"d-m-Y" }}</td>
+                                        <td>{{ cita.hora_cita|time:"H:i" }}</td>
+                                        <td>{{ cita.medico }}</td>
+                                        <td>{{ cita.especialidad }}</td>
+
+                                        <td>
+                                            <a href="{% url 'editarcitas' cita.id %}"
+                                                class="btn btn-secondary">Editar</a>
+
+                                            <a href="{% url 'eliminarcita' cita.id %}"
+                                                class="btn btn-danger btn-sm"
+                                                onclick="return confirm('¿Estás seguro de que deseas eliminar la cita de {{ cita.paciente.nombres }} {{ cita.paciente.apellidos }}?');">
+                                                Eliminar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Lista de Especialidades</h1>
+   <!--<a href="{% url 'registroespecialidad' %}" class="btn btn-primary mb-3">Registrar Especialidad</a>-->
+
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="card shadow w-100 mb-4">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered text-center align-middle table-hover" style="min-width: 600px;">
+                <thead style="background-color: #ced4da; color: black;">
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre de la Especialidad</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for especialidad in especialidades %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ especialidad.nombre }}</td>
+                    <td>
+                     <a href="{% url 'editarespecialidad' especialidad.id %}" class="btn btn-secondary btn-sm mb-1">Editar</a>
+                      <a href="{% url 'eliminarespecialidad' especialidad.id %}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar la especialidad {{ especialidad.nombre }}?');">
+                        Eliminar
+                      </a>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="3">No hay especialidades registradas.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="container ">
+    <h2 class="text-center">Editar Cita</h2>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form action="{% url 'editarcitas' cita.id %}" method="POST" class="row g-3">
+                {% csrf_token %}
+                <!-- Paciente -->
+                <div class="mb-3">
+                    <label for="paciente" class="form-label">Paciente</label>
+                    <select name="paciente" id="paciente" class="form-select" required>
+                       {% for paciente in pacientes %}
+<option value="{{ paciente.id }}" {% if cita.paciente and paciente.id == cita.paciente.id %}selected{% endif %}>
+    {{ paciente.nombres }} {{ paciente.apellidos }}
+</option>
+{% endfor %}
+
+                    </select>
+                </div>
+
+                <!-- Fecha -->
+                <div class="mb-3">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="date" id="fecha" name="fecha" class="form-control"
+                        value="{{ cita.fecha_cita|date:'Y-m-d' }}">
+
+                </div>
+
+                <!-- Hora -->
+                <div class="mb-3">
+                    <label for="hora" class="form-label">Hora</label>
+                    <input type="time" id="hora" name="hora" class="form-control" value="{{ cita.hora_cita|time:'H:i' }}">
+
+                </div>
+
+                <!-- Médico -->
+                <div class="mb-3">
+                    <label for="medico" class="form-label">Médico</label>
+                    <select name="medico" id="medico" class="form-select" required>
+                        {% for medico in medicos %}
+                    <option value="{{ medico.id }}" {% if cita.medico and medico.id == cita.medico.id %}selected{% endif %}>
+                      {{ medico.nombres }} {{ medico.apellidos }}
+                    </option>
+                    {% endfor %}
+
+                    </select>
+                </div>
+
+                <!-- Especialidad -->
+                <div class="mb-3">
+                    <label for="especialidad" class="form-label">Especialidad</label>
+                    <select name="especialidad" id="especialidad" class="form-select" required>
+                     {% for especialidad in especialidades %}
+                     <option value="{{ especialidad.id }}" {% if cita.especialidad and especialidad.id == cita.especialidad.id %}selected{% endif %}>
+                     {{ especialidad.nombre }}
+                     </option>
+                     {% endfor %}
+                     </select>
+
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                    <a href="{% url 'agendarcita' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

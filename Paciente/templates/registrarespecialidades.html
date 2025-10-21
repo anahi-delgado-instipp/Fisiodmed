@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Registrar Nueva Especialidad</h2>
+    <div class="card shadow">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label" for="nombres">Nombre:</label>
+                        <input class="form-control" type="text" id="nombre" name="nombre" required>
+
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="{% url 'listarespecialidad' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

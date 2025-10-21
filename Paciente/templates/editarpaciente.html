@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid px-4">
+    <h2 class="mt-4" style="text-align: center;">Editar Paciente</h2>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form id="formPaciente" action="{% url 'editarpaciente' paciente.id %}" method="POST" class="row g-3">
+                {% csrf_token %}
+                <div class=" col-md-4">
+                    <label for="nombres" class="form-label">Nombre</label>
+                    <input type="text" id="nombres" name="nombres" class="form-control" value="{{ paciente.nombres }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="apellidos" class="form-label">Apellido</label>
+                    <input type="text" id="apellidos" name="apellidos" class="form-control"
+                        value="{{ paciente.apellidos }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="cedula" class="form-label">Cedula</label>
+                    <input type="number" id="cedula" name="cedula" class="form-control" value="{{ paciente.cedula }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input type="text" id="direccion" name="direccion" class="form-control"
+                        value="{{ paciente.direccion }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="celular" class="form-label">Celular</label>
+                    <input type="number" id="celular" name="celular" class="form-control"
+                        value="{{ paciente.celular }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control"
+                        value="{{ paciente.fecha_nacimiento|date:'Y-m-d' }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="edad" class="form-label">Edad</label>
+                    <input type="text" id="edad" name="edad" class="form-control" value="{{ paciente.edad }}">
+
+                </div>
+
+                <div class="col-md-4">
+                    <label for="estado_civil" class="form-label">Estado Civil</label>
+                    <select class="form-control" id="estado_civil" name="estado_civil" required>
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="Soltero" {% if paciente.estado_civil == 'Soltero' %}selected{% endif %}>Soltero</option>
+                        <option value="Casado" {% if paciente.estado_civil == 'Casado' %}selected{% endif %}>Casado</option>
+                        <option value="Divorciado" {% if paciente.estado_civil == 'Divorciado' %}selected{% endif %}>Divorciado</option>
+                        <option value="Viudo" {% if paciente.estado_civil == 'Viudo' %}selected{% endif %}>Viudo</option>
+                        <option value="Union Libre" {% if paciente.estado_civil == 'Union Libre' %}selected{% endif %}>Unión Libre</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-4">
+                    <label for="tipo_sangre" class="form-label">Tipos de Sangre</label>
+                    <input type="text" id="tipo_sangre" name="tipo_sangre" class="form-control"
+                        value="{{ paciente.tipo_sangre }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="apellido_espos" class="form-label">Apellido Esposo/a</label>
+                    <input type="text" id="apellido_espos" name="apellido_espos" class="form-control"
+                        value="{{ paciente.apellido_espos }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="canton" class="form-label">Canton</label>
+                    <input type="text" id="canton" name="canton" class="form-control" value="{{ paciente.canton }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="correo" class="form-label">Correo Electronico</label>
+                    <input type="email" id="correo" name="correo" class="form-control" value="{{ paciente.correo }}">
+                </div>
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                    <a href="{% url 'ListadoPaciente' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("fecha_nacimiento").addEventListener("change", function () {
+        const birthDate = new Date(this.value);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById("edad").value = age;
+    });
+</script>
+{% endblock %}

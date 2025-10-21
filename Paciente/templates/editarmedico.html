@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid px-4">
+    <h2 class="mt-4" style="text-align: center;">Editar Paciente</h2>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form id="formMedico" action="{% url 'editarmedico' medico.id %}" method="POST" class="row g-3">
+                {% csrf_token %}
+
+
+                <div class=" col-md-4">
+                    <label for="nombres" class="form-label">Nombre</label>
+                    <input type="text" id="nombres" name="nombres" class="form-control" value="{{ medico.nombres }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="apellidos" class="form-label">Apellido</label>
+                    <input type="text" id="apellidos" name="apellidos" class="form-control"
+                        value="{{ medico.apellidos }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="cedula" class="form-label">Cedula</label>
+                    <input type="number" id="cedula" name="cedula" class="form-control" value="{{ medico.cedula }}">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input type="text" id="direccion" name="direccion" class="form-control"
+                        value="{{ medico.direccion }}">
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                    <a href="{% url 'ListadoMedico' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("fecha_nacimiento").addEventListener("change", function () {
+        const birthDate = new Date(this.value);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById("edad").value = age;
+    });
+</script>
+{% endblock %}

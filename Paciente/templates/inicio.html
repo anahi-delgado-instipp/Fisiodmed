@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Inicio</h2>
+
+<div class="alert alert-primary" role="alert">
+    Bienvenido/a {{ user.first_name }} {{ user.last_name }}
+</div>
+
+<main style="padding: 0px;">
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.3962796198016!2d-79.9595478!3d-3.2512912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x90330f59988baab5%3A0x9b7acc911cd77d0b!2sFisiomed!5e0!3m2!1ses-419!2sec!4v1748321537883!5m2!1ses-419!2sec"
+        width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <br>
+
+    <img src="https://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=FFFFFF&amp;data=https%3A%2F%2Fwww.google.com%2Fmaps%2Fembed%3Fpb%3D!1m18!1m12!1m3!1d3983.3962796198016!2d-79.9595478!3d-3.2512912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x90330f59988baab5%253A0x9b7acc911cd77d0b!2sFisiomed!5e0!3m2!1ses-419!2sec!4v1748321537883!5m2!1ses-419!2sec%0A&amp;qzone=1&amp;margin=0&amp;size=400x400&amp;ecc=L"
+        width="150" height="150" alt="qr code" />
+
+    <p><span>📌</span> Kleber Franco e/ Av. Las palmeras y 6ta Oeste</p>
+</main>
+
+<script>
+    // Ocultar la alerta después de 3 segundos
+    setTimeout(function () {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+            alert.style.transition = "opacity 0.5s ease";
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 3000);
+</script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="margin-top: 10px;">
+    <h2>Registrar Cita</h2>
+    <form action="{% url 'registrarcita' %}" method="POST">
+
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="paciente" class="form-label">Paciente</label>
+            <select id="paciente" name="paciente" class="form-control" required>
+                <option value="" disabled selected>Seleccione un paciente</option>
+                {% for paciente in pacientes %}
+                <option value="{{ paciente.id }}">{{ paciente.nombres }} {{ paciente.apellidos }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha_cita" class="form-label">Fecha</label>
+            <input type="date" id="fecha_cita" name="fecha_cita" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="hora_cita" class="form-label">Hora</label>
+            <input type="time" id="hora_cita" name="hora_cita" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+             <label for="medico" class="form-label">Medico:</label>
+            <select id="medico" name="medico" class="form-control" required>
+                <option value="" disabled selected>Seleccione un medico</option>
+                {% for medico in medicos %}
+                <option value="{{ medico.id }}">{{ medico.nombres }} {{ medico.apellidos }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+             <label for="especialidad" class="form-label">Especialidad:</label>
+            <select id="especialidad" name="especialidad" class="form-control" required>
+                <option value="" disabled selected>Seleccione una especialidad</option>
+                {% for especialidad in especialidades %}
+                <option value="{{ especialidad.id }}">{{ especialidad.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'agendarcita' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>
+{% endblock %}

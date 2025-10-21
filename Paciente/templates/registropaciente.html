@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mt-4">Registro de Paciente</h2>
+    <form action="{% url 'registropaciente' %}" id="formulario" method="POST" class="row g-3">
+        {% csrf_token %}
+        
+        <div class="col-md-4">
+            <label class="form-label" for="nombres">Nombre:</label>
+            <input class="form-control" type="text" id="nombres" name="nombres" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="apellidos">Apellido:</label>
+            <input class="form-control" type="text" id="apellidos" name="apellidos" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="cedula">Cédula:</label>
+            <input class="form-control" type="text" id="cedula" name="cedula" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="direccion">Dirección:</label>
+            <input class="form-control" type="text" id="direccion" name="direccion" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="celular">Celular:</label>
+            <input class="form-control" type="text" id="celular" name="celular" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input class="form-control" type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="edad">Edad:</label>
+            <input class="form-control" type="number" id="edad" name="edad" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="estado_civil">Estado Civil:</label>
+            <select class="form-control" id="estado_civil" name="estado_civil" required>
+                <option value="soltero">Soltero</option>
+                <option value="casado">Casado</option>
+                <option value="divorciado">Divorciado</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="tipo_sangre">Tipo de Sangre:</label>
+            <input class="form-control" type="text" id="tipo_sangre" name="tipo_sangre" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="apellido_espos">Apellido del Esposo/a:</label>
+            <input class="form-control" type="text" id="apellido_espos" name="apellido_espos">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="canton">Cantón:</label>
+            <input class="form-control" type="text" id="canton" name="canton" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" for="correo">Correo Electrónico:</label>
+            <input class="form-control" type="email" id="correo" name="correo" required>
+        </div>
+
+        <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{% url 'ListadoPaciente' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<!-- Script para calcular edad -->
+
+<script>
+    
+    document.getElementById("fecha_nacimiento").addEventListener("change", function () {
+        const birthDate = new Date(this.value);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById("edad").value = age;
+    });
+</script>
+{% endblock %}

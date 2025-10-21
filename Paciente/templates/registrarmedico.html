@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Registro Medico</h2>
+   
+        
+            <form action="{% url 'registrarmedico' %}" method="POST" class="row g-3">
+                {% csrf_token %}
+                
+                    <div class="col-md-4">
+                        <label class="form-label" for="nombres">Nombre:</label>
+                        <input class="form-control" type="text" id="nombres" name="nombres" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="apellidos">Apellido:</label>
+                        <input class="form-control" type="text" id="apellidos" name="apellidos" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="cedula">Cédula:</label>
+                        <input class="form-control" type="text" id="cedula" name="cedula" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" for="direccion">Dirección:</label>
+                        <input class="form-control" type="text" id="direccion" name="direccion" required>
+                    </div>
+                
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="{% url 'ListadoMedico' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+    
+    
+</div>
+{% endblock %}
